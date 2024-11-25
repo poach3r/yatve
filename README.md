@@ -1,5 +1,7 @@
 YATVE (Yet Another Text View Editor) is a simplistic GTK4 text editor written to better understand the Java-GI library.
 
+![](img.png)
+
 # Keybinds
 | Combination | Effect                             |
 |-------------|------------------------------------|
