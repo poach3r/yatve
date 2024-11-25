@@ -10,11 +10,9 @@ class Editor(
     address: MemorySegment? = null,
 ): Application(address) {
     override fun activate() {
-        this.activeWindow ?: EditorWindow.create(this).apply {
+        (this.activeWindow ?: EditorWindow.create(this).apply {
             setDefaultSize(600, 400)
-        }.also {
-            it.present()
-        }
+        }).present()
     }
 
     companion object {
