@@ -54,7 +54,7 @@ class EditorWindow(
 
             addController(EventControllerKey().apply {
                 onKeyPressed(this@EditorWindow::keyPressed)
-                onKeyReleased(this@EditorWindow::keyReleased)
+                //onKeyReleased(this@EditorWindow::keyReleased)
             })
         }
 
@@ -114,12 +114,14 @@ class EditorWindow(
     }
 
     private fun keyPressed(keyval: Int, keycode: Int, state: Set<ModifierType>): Boolean {
+        inputHandler.setModifier(state)
         inputHandler.keyPressed(Gdk.keyvalName(keyval)).invoke(this)
 
         return false
     }
 
     private fun keyReleased(keyval: Int, keycode: Int, state: Set<ModifierType>): Boolean {
+        inputHandler.setModifier(state)
         inputHandler.keyReleased(Gdk.keyvalName(keyval)).invoke(this)
 
         return false

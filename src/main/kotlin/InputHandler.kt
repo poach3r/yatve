@@ -1,12 +1,19 @@
 package org.poach3r
 
+import org.gnome.gdk.ModifierType
+
 class InputHandler {
-    private var ctrlHeld = false
+    private var modifier: ModifierType? = null
+
+    fun setModifier(mods: Set<ModifierType>) {
+        if(mods.isEmpty())
+            modifier = null
+        else
+            modifier = mods.elementAt(0)
+    }
 
     fun keyPressed(keyname: String): (editorWindow: EditorWindow) -> Unit {
         return when(keyname) {
-            "Control_L", "Control_R" -> normFun { ctrlHeld = true }
-
             "n" -> ctrlHeldFun { it.createBuffer() }
             "r" -> ctrlHeldFun { it.removeBuffer() }
             "o" -> ctrlHeldFun { it.open() }
@@ -28,10 +35,6 @@ class InputHandler {
 
     fun keyReleased(keyname: String): (editorWindow: EditorWindow) -> Unit {
         return when(keyname) {
-            "Control_L", "Control_R" -> normFun {
-                ctrlHeld = false
-            }
-
             else -> noneFun()
         }
     }
@@ -41,7 +44,7 @@ class InputHandler {
     }
 
     private fun ctrlHeldFun(unit: (editorWindow: EditorWindow) -> Unit): (editorWindow: EditorWindow) -> Unit {
-        if(ctrlHeld) {
+        if(modifier == ModifierType.CONTROL_MASK) {
             return unit
         }
 
