@@ -1,3 +1,7 @@
+* {
+    border: 0;
+}
+
 .LeftButton {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
@@ -6,4 +10,10 @@
 .RightButton {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+}
+
+.CurrentBuffer {
+    background-image: none;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
 }
